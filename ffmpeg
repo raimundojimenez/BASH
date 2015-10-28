@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in $( ls *.mp4 ); do
+  new=`echo ${i} | sed -e "s/mp4/avi/"`
+  echo $i '-->' $new
+  ffmpeg -i $i -c:v libxvid -tag:v XVID -q:v 5 -s 640x480 -aspect 4:3 -c:a libmp3lame -q:a 5 $new 2> /dev/null
+done
